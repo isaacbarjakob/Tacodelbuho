@@ -59,8 +59,7 @@ collections:
             name: button_link
             widget: string
             required: false
-            hint: Exempel: #meny eller en full https-länk.
-
+            hint: "Exempel: #meny eller en full https-länk."
       - name: events
         label: Sport & event
         file: content/events.json
