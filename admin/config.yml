@@ -60,6 +60,7 @@ collections:
             widget: string
             required: false
             hint: "Exempel: #meny eller en full https-länk."
+
       - name: events
         label: Sport & event
         file: content/events.json
@@ -76,6 +77,10 @@ collections:
             fields:
               - { label: Typ, name: type, widget: string, hint: Exempel SPORT, QUIZ eller LIVEMUSIK }
               - { label: Datum, name: date, widget: string }
+              - { label: Rubrik, name: title, widget: string }
+              - { label: Beskrivning, name: text, widget: text }
+              - { label: Tid, name: time, widget: string }
+              - { label: Liten text, name: note, widget: string, required: false }
               - { label: Rubrik, name: title, widget: string }
               - { label: Beskrivning, name: text, widget: text }
               - { label: Tid, name: time, widget: string }
