@@ -2,7 +2,7 @@ backend:
   name: github
   repo: isaacbarjakob/Tacodelbuho
   branch: main
-  base_url: https://tacodelbuho.pages.dev
+ base_url: https://tacodelbuho-admin-auth.isaac-barjakob.workers.dev
   auth_endpoint: /auth
   site_domain: tacodelbuho.pages.dev
 
