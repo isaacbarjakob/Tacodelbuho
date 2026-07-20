@@ -2,10 +2,9 @@ backend:
   name: github
   repo: isaacbarjakob/Tacodelbuho
   branch: main
-
-# OAuth-adressen fylls i när GitHub-kopplingen görs.
-# base_url: https://DIN-OAUTH-ADRESS
-# auth_endpoint: auth
+  base_url: https://tacodelbuho.pages.dev
+  auth_endpoint: /auth
+  site_domain: tacodelbuho.pages.dev
 
 site_url: https://tacodelbuho.pages.dev
 display_url: https://tacodelbuho.pages.dev
