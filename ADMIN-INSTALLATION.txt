@@ -1,0 +1,29 @@
+TACO DEL BÚHO – SLUTLIG INSTALLATION
+
+Ladda upp hela innehållet i denna ZIP till GitHub-repot Tacodelbuho och låt Cloudflare Pages publicera sidan.
+
+CLOUDFLARE-VARIABLER
+Gå till Cloudflare > Workers & Pages > ditt Pages-projekt > Settings > Variables and Secrets.
+Lägg in följande i Production:
+
+ADMIN_PASSWORD = ett starkt lösenord du väljer
+GITHUB_TOKEN = GitHub fine-grained token med Contents: Read and write för repot Tacodelbuho
+RESEND_API_KEY = din API-nyckel från Resend
+BOOKING_TO_EMAIL = tacodelbuho@hotmail.com
+RESEND_FROM_EMAIL = Taco del Búho <bokning@tacodelbuho.com>
+
+VIKTIGT FÖR RESEND
+1. Lägg till och verifiera domänen tacodelbuho.com i Resend.
+2. Lägg in DNS-posterna som Resend visar i Cloudflare DNS.
+3. När domänen är verifierad fungerar avsändaren bokning@tacodelbuho.com.
+4. Deploya om Cloudflare Pages efter att variablerna lagts in.
+
+ADMINPANEL
+https://tacodelbuho.pages.dev/admin/
+
+Adminpanelen ändrar aktuellt/lunch, event, öppettider och bilder via GitHub. Bokningsformuläret skickar endast ett mail direkt till BOOKING_TO_EMAIL via Resend. Kunden får inget automatiskt bekräftelsemail.
+
+Valfritt om repo eller branch ändras:
+GITHUB_OWNER=isaacbarjakob
+GITHUB_REPO=Tacodelbuho
+GITHUB_BRANCH=main
