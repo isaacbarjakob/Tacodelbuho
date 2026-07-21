@@ -1,0 +1,29 @@
+TACO DEL BÚHO – CLOUDFLARE-INSTÄLLNINGAR
+
+Lägg till under Cloudflare Pages → Settings → Variables and secrets → Production:
+
+SECRET
+ADMIN_PASSWORD = ditt valda adminlösenord
+GITHUB_TOKEN = GitHub fine-grained token med Contents: Read and write för repot Tacodelbuho
+
+TEXT
+GITHUB_REPO = isaacbarjakob/Tacodelbuho
+GITHUB_BRANCH = main
+
+SENARE, NÄR DOMÄN OCH RESEND ÄR KLARA
+SECRET
+RESEND_API_KEY = din Resend API-nyckel
+
+TEXT
+BOOKING_TO_EMAIL = tacodelbuho@hotmail.com
+RESEND_FROM_EMAIL = Taco del Búho <bokning@din-verifierade-domän.se>
+
+VIKTIGT
+Efter att variabler lagts till måste en NY deployment startas. En gammal redan byggd deployment får inte automatiskt de nya värdena.
+
+Adminpanel:
+https://tacodelbuho.pages.dev/admin/
+
+Diagnos:
+https://tacodelbuho.pages.dev/api/admin/auth
+Den ska visa passwordConfigured:true när ADMIN_PASSWORD finns i aktuell deployment.
