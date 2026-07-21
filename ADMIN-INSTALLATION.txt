@@ -27,3 +27,4 @@ https://tacodelbuho.pages.dev/admin/
 Diagnos:
 https://tacodelbuho.pages.dev/api/admin/auth
 Den ska visa passwordConfigured:true när ADMIN_PASSWORD finns i aktuell deployment.
+.
