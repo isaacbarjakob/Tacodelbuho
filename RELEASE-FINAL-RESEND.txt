@@ -1,8 +1,0 @@
-TACO DEL BÚHO – FINAL MED RESEND
-
-- Formspree/FormSubmit borttaget.
-- Bokningsförfrågningar skickas direkt till restaurangens mail via Resend.
-- Kunden får inget automatiskt mail.
-- Svar-till sätts till kundens e-post när den anges.
-- Validering, honeypot och skydd mot externa formuläranrop är inbyggt.
-- Befintlig egen adminpanel och alla bilder finns kvar.

@@ -1,9 +1,0 @@
-TACO DEL BÚHO — V17 FINAL
-
-Fixat:
-- Instagram länkar nu till https://www.instagram.com/tacodelbuho
-- "Veckans erbjudande" ändrat till "Veckans lunch"
-- Dubblerad footertext borttagen
-- Förbättrad mobil layout så rubriker och texter inte ligger ovanpå varandra
-- Justerade knappar, rubriker, hero, kontakt och aktuellt-sektion
-- CMS-innehållet använder nu Veckans lunch

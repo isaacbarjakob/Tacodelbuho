@@ -1,3 +1,0 @@
-TACO DEL BÚHO V16 – Decap CMS-förberedd
-Ny redigerbar Aktuellt-sektion och adminpanel på /admin/.
-GitHub-repository och OAuth måste kopplas innan inloggning/publicering fungerar.
