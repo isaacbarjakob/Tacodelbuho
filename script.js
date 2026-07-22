@@ -15,6 +15,11 @@ if(bookingDate){
 
 form?.addEventListener('submit', async (e)=>{
   e.preventDefault();
+  if(!form.checkValidity()){
+    form.reportValidity();
+    status.textContent='Kontrollera de markerade fälten.';
+    return;
+  }
   status.textContent='Skickar bokningsförfrågan...';
   const button=form.querySelector('button[type="submit"]');
   button.disabled=true;

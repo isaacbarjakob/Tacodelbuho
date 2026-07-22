@@ -13,8 +13,30 @@ const escapeHtml = (value) => clean(value, 2000).replace(/[&<>"']/g, (char) => (
 }[char]));
 
 const validEmail = (value) => !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-const validDate = (value) => /^\d{4}-\d{2}-\d{2}$/.test(value);
-const validTime = (value) => /^\d{2}:\d{2}$/.test(value);
+const normalizeDate = (value) => {
+  const raw = clean(value, 20);
+  const digits = raw.replace(/\D/g, '');
+  if (digits.length === 8) return `${digits.slice(0,4)}-${digits.slice(4,6)}-${digits.slice(6,8)}`;
+  return raw;
+};
+const normalizeTime = (value) => {
+  const raw = clean(value, 10);
+  const match = raw.match(/^(\d{1,2}):(\d{2})/);
+  if (!match) return raw;
+  return `${match[1].padStart(2, '0')}:${match[2]}`;
+};
+const validDate = (value) => {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const [y,m,d] = value.split('-').map(Number);
+  const parsed = new Date(Date.UTC(y,m-1,d));
+  return parsed.getUTCFullYear() === y && parsed.getUTCMonth() === m-1 && parsed.getUTCDate() === d;
+};
+const validTime = (value) => {
+  const match = value.match(/^(\d{2}):(\d{2})$/);
+  if (!match) return false;
+  const h = Number(match[1]), m = Number(match[2]);
+  return h >= 0 && h <= 23 && m >= 0 && m <= 59;
+};
 
 export async function onRequestPost({ request, env }) {
   if (!env.RESEND_API_KEY) return json({ error: 'Mailfunktionen är inte konfigurerad ännu.' }, 500);
@@ -36,14 +58,21 @@ export async function onRequestPost({ request, env }) {
   const name = clean(form.get('name'), 80);
   const phone = clean(form.get('phone'), 30);
   const email = clean(form.get('email'), 120);
-  const date = clean(form.get('date'), 10);
-  const time = clean(form.get('time'), 5);
+  const date = normalizeDate(form.get('date'));
+  const time = normalizeTime(form.get('time'));
   const guestsRaw = Number(form.get('guests'));
   const guests = Number.isInteger(guestsRaw) ? guestsRaw : 0;
   const message = clean(form.get('message'), 1000);
 
-  if (!name || !phone || !validDate(date) || !validTime(time) || guests < 1 || guests > 50 || !validEmail(email)) {
-    return json({ error: 'Kontrollera att namn, telefon, datum, tid och antal personer är korrekt ifyllda.' }, 400);
+  const errors = [];
+  if (!name) errors.push('namn');
+  if (!phone) errors.push('telefon');
+  if (!validEmail(email)) errors.push('e-post');
+  if (!validDate(date)) errors.push('datum');
+  if (!validTime(time)) errors.push('tid');
+  if (guests < 1 || guests > 50) errors.push('antal personer');
+  if (errors.length) {
+    return json({ error: `Kontrollera följande fält: ${errors.join(', ')}.` }, 400);
   }
 
   const to = env.BOOKING_TO_EMAIL || 'tacodelbuho@hotmail.com';
