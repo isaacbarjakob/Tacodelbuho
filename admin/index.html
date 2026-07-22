@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Taco del Búho – Admin</title>
+<link rel="stylesheet" href="admin.css"></head>
+<body>
+<div class="shell">
+  <aside><div class="brand"><img src="/assets/logo.jpg" alt=""><div><strong>TACO DEL BÚHO</strong><span>ADMIN</span></div></div>
+    <nav aria-label="Adminsektioner"><button class="nav active" data-view="aktuellt" type="button">Aktuellt & lunch</button><button class="nav" data-view="events" type="button">Event</button><button class="nav" data-view="hours" type="button">Öppettider</button></nav>
+    <a class="site-link" href="/" target="_blank">Öppna hemsidan ↗</a>
+  </aside>
+  <main>
+    <header><div><p>ADMINPANEL</p><h1 id="page-title">Aktuellt & lunch</h1></div><button id="logout" class="quiet">Logga ut</button></header><div class="mobile-view-picker"><label for="mobile-view">Välj sektion</label><select id="mobile-view" aria-label="Välj adminsektion"><option value="aktuellt">Aktuellt & lunch</option><option value="events">Event</option><option value="hours">Öppettider</option></select></div>
+    <section id="login" class="login-card"><h2>Logga in</h2><p>Använd adminlösenordet som är sparat i Cloudflare.</p><input id="password" type="password" placeholder="Adminlösenord" autocomplete="current-password" spellcheck="false"><button id="login-btn" class="primary">Logga in</button><p id="login-status" class="status"></p></section>
+    <div id="app" hidden>
+      <section class="panel view" data-view-panel="aktuellt">
+        <div class="row toggle-row"><div><h2>Aktuellt på startsidan</h2><p>Veckans lunch, erbjudande eller nyhet.</p></div><label class="switch"><input id="offer-visible" type="checkbox"><span></span></label></div>
+        <label>Överrubrik<input id="offer-kicker"></label><label>Rubrik<input id="offer-title"></label><label>Text<textarea id="offer-text"></textarea></label>
+        <div class="grid2"><label>Knapptext<input id="offer-button-text"></label><label>Knappens länk<input id="offer-button-link" placeholder="#meny"></label></div>
+        <label>Bild<div class="upload-row"><input id="offer-image" placeholder="/assets/bild.webp"><input id="image-file" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif"><button id="upload-btn" type="button" class="secondary">Ladda upp bild</button></div></label>
+        <p class="image-help">Du behöver inte anpassa pixlarna. Bilden minskas och komprimeras automatiskt.</p>
+        <div class="grid2 image-controls">
+          <label>Hur bilden ska visas<select id="offer-image-fit"><option value="contain">Visa hela bilden – bäst för lunchmeny/affisch</option><option value="cover">Fyll hela ytan – bäst för matfoto</option></select></label>
+          <label>Bildens fokus<select id="offer-image-position"><option value="center">Mitten</option><option value="top">Överkant</option><option value="bottom">Nederkant</option></select></label>
+        </div>
+        <div class="preview-grid">
+          <div><strong>Dator</strong><div class="preview-frame preview-desktop"><img id="image-preview" alt="Förhandsvisning på dator"></div></div>
+          <div><strong>Mobil</strong><div class="preview-frame preview-mobile"><img id="image-preview-mobile" alt="Förhandsvisning på mobil"></div></div>
+        </div>
+      </section>
+      <section class="panel view" data-view-panel="events" hidden>
+        <div class="row toggle-row"><div><h2>Sport & event</h2><p>Upp till sex event visas på hemsidan.</p></div><label class="switch"><input id="events-visible" type="checkbox"><span></span></label></div>
+        <div id="event-list"></div><button id="add-event" type="button" class="secondary">+ Lägg till event</button>
+      </section>
+      <section class="panel view" data-view-panel="hours" hidden>
+        <h2>Öppettider</h2><p>Texten visas under kontaktsektionen.</p><label>Rad 1<input id="hours-line1"></label><label>Rad 2<input id="hours-line2"></label>
+      </section>
+      <div class="savebar"><span id="save-status" class="status"></span><button id="save" class="primary">Spara & publicera</button></div>
+    </div>
+  </main>
+</div><script src="admin.js"></script></body></html>

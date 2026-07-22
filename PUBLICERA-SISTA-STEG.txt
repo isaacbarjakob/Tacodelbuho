@@ -1,0 +1,29 @@
+TACO DEL BÚHO – PUBLICERINGSKLAR VERSION
+
+DETTA FUNGERAR NU
+- Hemsidan på Cloudflare Pages
+- Egen adminpanel på /admin/
+- Aktuellt/lunch, event, öppettider och bilduppladdning
+- Spara direkt till GitHub och automatisk publicering via Cloudflare
+- Mobilanpassning, menyfilter, galleri, SEO, sitemap och 404-sida
+- Bokningsformulär via Cloudflare Function + Resend-kod
+
+CLOUDFLARE – VARIABLER SOM SKA FINNAS I PRODUCTION
+ADMIN_PASSWORD  (Secret)
+GITHUB_TOKEN     (Secret)
+GITHUB_REPO      isaacbarjakob/Tacodelbuho
+GITHUB_BRANCH    main
+
+NÄR DOMÄNEN ÄR KÖPT
+1. Koppla domänen till Cloudflare Pages.
+2. Verifiera domänen i Resend.
+3. Lägg till följande i Cloudflare Production:
+   RESEND_API_KEY     (Secret)
+   BOOKING_TO_EMAIL   tacodelbuho@hotmail.com
+   RESEND_FROM_EMAIL  Taco del Búho <bokning@din-domän.se>
+4. Skapa en ny deployment och skicka en testbokning.
+
+VIKTIGT
+- Byt ADMIN_PASSWORD eftersom det tidigare syntes på en skärmbild.
+- Dela aldrig GITHUB_TOKEN eller RESEND_API_KEY.
+- Kontrollera menypriser och öppettider innan den riktiga domänen lanseras.
