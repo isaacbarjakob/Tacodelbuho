@@ -4,10 +4,10 @@
   "title": "VECKANS LUNCH",
   "text": "Här publicerar vi veckans lunch. Välkommen in till Taco del Búho mitt i Strängnäs!",
   "image": "/assets/premium-spread.webp",
-  "image_alt": "Ett urval av mat från Taco del Búho",
+  "image_alt": "VECKANS LUNCH",
+  "image_fit": "contain",
+  "image_position": "center",
   "show_button": true,
   "button_text": "SE HELA MENYN",
-  "button_link": "#meny",
-  "image_fit": "contain",
-  "image_position": "center"
+  "button_link": "#meny"
 }
