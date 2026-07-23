@@ -52,6 +52,31 @@ test('bokningsmejl skickas alltid till Taco del Búho', async () => {
   }
 });
 
+test('bokningen använder Resends verifierade testavsändare utan köpt domän', async () => {
+  const originalFetch = globalThis.fetch;
+  let sent;
+  globalThis.fetch = async (_url, options) => {
+    sent = JSON.parse(options.body);
+    return new Response(JSON.stringify({ id: 'email-test-id' }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  };
+
+  try {
+    const response = await onRequestPost({
+      request: requestFor(),
+      env: { RESEND_API_KEY: 'test-key' },
+    });
+
+    assert.equal(response.status, 200);
+    assert.equal(sent.from, 'Taco del Búho <onboarding@resend.dev>');
+    assert.deepEqual(sent.to, ['tacodelbuho@hotmail.com']);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
 test('bokningen kräver en giltig e-postadress', async () => {
   const response = await onRequestPost({
     request: requestFor({ email: 'inte-en-epost' }),
