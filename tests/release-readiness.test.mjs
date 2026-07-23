@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const read = (path) => readFile(resolve(root, path), 'utf8');
 
-test('SEO pekar på den publicerade Pages-adressen tills domänen är köpt', async () => {
+test('SEO pekar endast på den primära domänen', async () => {
   const [html, robots, sitemap] = await Promise.all([
     read('index.html'),
     read('robots.txt'),
@@ -15,11 +15,14 @@ test('SEO pekar på den publicerade Pages-adressen tills domänen är köpt', as
   ]);
   const releaseFiles = `${html}\n${robots}\n${sitemap}`;
 
-  assert.doesNotMatch(releaseFiles, /https:\/\/tacodelbuho\.com/);
-  assert.match(html, /rel="canonical" href="https:\/\/tacodelbuho\.pages\.dev\/"/);
+  assert.doesNotMatch(releaseFiles, /https:\/\/tacodelbuho\.pages\.dev/);
+  assert.match(html, /rel="canonical" href="https:\/\/tacodelbuho\.com\/"/);
+  assert.match(html, /property="og:url" content="https:\/\/tacodelbuho\.com\/"/);
+  assert.match(html, /"url":"https:\/\/tacodelbuho\.com\/"/);
   assert.match(html, /og:image:width" content="1200"/);
   assert.match(html, /og:image:height" content="630"/);
-  assert.match(robots, /https:\/\/tacodelbuho\.pages\.dev\/sitemap\.xml/);
+  assert.match(robots, /https:\/\/tacodelbuho\.com\/sitemap\.xml/);
+  assert.match(sitemap, /<loc>https:\/\/tacodelbuho\.com\/<\/loc>/);
 });
 
 test('alla lokala bilder, skript och stilmallar som HTML-filerna länkar till finns', async () => {

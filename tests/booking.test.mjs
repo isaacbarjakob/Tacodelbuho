@@ -15,9 +15,9 @@ const requestFor = (overrides = {}) => {
   };
   const form = new FormData();
   Object.entries(fields).forEach(([key, value]) => form.set(key, value));
-  return new Request('https://tacodelbuho.pages.dev/api/booking', {
+  return new Request('https://tacodelbuho.com/api/booking', {
     method: 'POST',
-    headers: { Origin: 'https://tacodelbuho.pages.dev' },
+    headers: { Origin: 'https://tacodelbuho.com' },
     body: form,
   });
 };
@@ -52,7 +52,7 @@ test('bokningsmejl skickas alltid till Taco del Búho', async () => {
   }
 });
 
-test('bokningen använder Resends verifierade testavsändare utan köpt domän', async () => {
+test('bokningen använder Resends verifierade reservavsändare', async () => {
   const originalFetch = globalThis.fetch;
   let sent;
   globalThis.fetch = async (_url, options) => {

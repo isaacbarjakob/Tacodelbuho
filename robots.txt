@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tacodelbuho.pages.dev/sitemap.xml
+Sitemap: https://tacodelbuho.com/sitemap.xml
