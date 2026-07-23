@@ -13,6 +13,7 @@ const escapeHtml = (value) => clean(value, 2000).replace(/[&<>"']/g, (char) => (
 }[char]));
 const validEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 const validPhone = (value) => /^[+()\d\s-]{6,30}$/.test(value);
+const BOOKING_TO_EMAIL = 'tacodelbuho@hotmail.com';
 const normalizeDate = (value) => {
   const raw = clean(value, 20);
   const digits = raw.replace(/\D/g, '');
@@ -85,7 +86,7 @@ export async function onRequestPost({ request, env }) {
 
   const guestLabel = guests === 9 ? '9+ personer' : `${guests} ${guests === 1 ? 'person' : 'personer'}`;
   const extras = [highchair && 'Barnstol', birthday && 'Födelsedagsfirande'].filter(Boolean);
-  const to = env.BOOKING_TO_EMAIL || 'tacodelbuho@hotmail.com';
+  const to = BOOKING_TO_EMAIL;
   const from = env.RESEND_FROM_EMAIL || 'Taco del Búho <bokning@tacodelbuho.com>';
   const subject = `Ny bokningsförfrågan: ${date} kl. ${time} – ${guestLabel}`;
   const text = [

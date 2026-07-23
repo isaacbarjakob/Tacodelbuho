@@ -42,7 +42,7 @@ input:focus,textarea:focus,select:focus{outline:0;border-color:var(--orange);box
   aside nav{width:100%;display:flex;gap:6px;overflow-x:auto;overflow-y:hidden;padding:2px 0 4px;-webkit-overflow-scrolling:touch;touch-action:pan-x;scroll-snap-type:x proximity}
   .nav{flex:0 0 auto;min-width:max-content;margin:0;scroll-snap-align:start;position:relative;z-index:1}
   main{min-width:0;padding-top:18px}
-  .mobile-view-picker{display:block}
+  .mobile-view-picker{display:block;position:sticky;top:12px;z-index:35}
   header{margin-bottom:16px}
   h1{font-size:clamp(1.65rem,8vw,2.25rem)}
   .panel{overflow:visible}

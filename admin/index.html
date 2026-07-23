@@ -9,9 +9,10 @@
     <a class="site-link" href="/" target="_blank">Öppna hemsidan ↗</a>
   </aside>
   <main>
-    <header><div><p>ADMINPANEL</p><h1 id="page-title">Aktuellt & lunch</h1></div><button id="logout" class="quiet">Logga ut</button></header><div class="mobile-view-picker"><label for="mobile-view">Välj sektion</label><select id="mobile-view" aria-label="Välj adminsektion"><option value="aktuellt">Aktuellt & lunch</option><option value="events">Event</option><option value="hours">Öppettider</option></select></div>
+    <header><div><p>ADMINPANEL</p><h1 id="page-title">Aktuellt & lunch</h1></div><button id="logout" class="quiet">Logga ut</button></header>
     <section id="login" class="login-card"><h2>Logga in</h2><p>Använd adminlösenordet som är sparat i Cloudflare.</p><input id="password" type="password" placeholder="Adminlösenord" autocomplete="current-password" spellcheck="false"><button id="login-btn" class="primary">Logga in</button><p id="login-status" class="status"></p></section>
     <div id="app" hidden>
+      <div class="mobile-view-picker"><label for="mobile-view">Välj sektion</label><select id="mobile-view" aria-label="Välj adminsektion"><option value="aktuellt">Aktuellt & lunch</option><option value="events">Event</option><option value="hours">Öppettider</option></select></div>
       <section class="panel view" data-view-panel="aktuellt">
         <div class="row toggle-row"><div><h2>Aktuellt på startsidan</h2><p>Veckans lunch, erbjudande eller nyhet.</p></div><label class="switch"><input id="offer-visible" type="checkbox"><span></span></label></div>
         <label>Överrubrik<input id="offer-kicker"></label><label>Rubrik<input id="offer-title"></label><label>Text<textarea id="offer-text"></textarea></label>
