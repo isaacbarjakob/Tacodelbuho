@@ -1,6 +1,25 @@
 const t=document.getElementById('toggle'),n=document.getElementById('nav');
-t.onclick=()=>{const open=n.classList.toggle('open');t.setAttribute('aria-expanded',String(open))};
-document.querySelectorAll('nav a').forEach(a=>a.onclick=()=>{n.classList.remove('open');t.setAttribute('aria-expanded','false')});
+const prefersReducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const closeNav=()=>{
+  n?.classList.remove('open');
+  t?.setAttribute('aria-expanded','false');
+  t?.setAttribute('aria-label','Öppna meny');
+};
+t?.addEventListener('click',()=>{
+  const open=n?.classList.toggle('open')||false;
+  t.setAttribute('aria-expanded',String(open));
+  t.setAttribute('aria-label',open?'Stäng meny':'Öppna meny');
+});
+document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',closeNav));
+document.addEventListener('click',event=>{
+  if(n?.classList.contains('open')&&!event.target.closest('header'))closeNav();
+});
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&n?.classList.contains('open')){
+    closeNav();
+    t?.focus();
+  }
+});
 document.getElementById('year').textContent=new Date().getFullYear();
 
 const form=document.getElementById('form');
@@ -53,11 +72,17 @@ buildTimeOptions();
 const setFieldStates=()=>{
   form?.querySelectorAll('input,select,textarea').forEach(field=>{
     if(field.type==='checkbox'||field.name==='website')return;
-    field.closest('.field')?.classList.toggle('has-error',!field.validity.valid);
+    const invalid=!field.validity.valid;
+    field.closest('.field')?.classList.toggle('has-error',invalid);
+    field.setAttribute('aria-invalid',String(invalid));
   });
 };
 form?.querySelectorAll('input,select,textarea').forEach(field=>{
-  field.addEventListener('input',()=>{field.setCustomValidity('');field.closest('.field')?.classList.remove('has-error')});
+  field.addEventListener('input',()=>{
+    field.setCustomValidity('');
+    field.closest('.field')?.classList.remove('has-error');
+    field.setAttribute('aria-invalid','false');
+  });
   field.addEventListener('blur',setFieldStates);
 });
 
@@ -67,10 +92,11 @@ form?.addEventListener('submit', async (event)=>{
   if(dateValue && !dayHours(dateValue))bookingDate.setCustomValidity('Vi har stängt på måndagar. Välj en annan dag.');
   if(!form.checkValidity()){
     setFieldStates();
-    form.reportValidity();
+    const invalidFields=[...form.querySelectorAll(':invalid')];
+    const labels=invalidFields.map(field=>field.closest('.field')?.querySelector('span')?.textContent.replace(' *','')).filter(Boolean);
     status.className='form-status error';
-    status.textContent='Kontrollera de markerade obligatoriska fälten.';
-    form.querySelector(':invalid')?.focus();
+    status.textContent=`Kontrollera ${[...new Set(labels)].join(', ').toLocaleLowerCase('sv-SE')||'de markerade fälten'}.`;
+    invalidFields[0]?.focus();
     return;
   }
   status.className='form-status loading';
@@ -84,11 +110,16 @@ form?.addEventListener('submit', async (event)=>{
     status.className='form-status success';
     status.textContent='Tack! Förfrågan är skickad. Vi återkommer med en bekräftelse via e-post eller telefon.';
     form.reset();
+    form.querySelectorAll('[aria-invalid]').forEach(field=>field.setAttribute('aria-invalid','false'));
     bookingDate.min=localDateString();
     buildTimeOptions();
+    status.focus({preventScroll:true});
   }catch(error){
     status.className='form-status error';
-    status.textContent=error.message||'Kunde inte skicka just nu. Ring oss gärna på 08-410 441 02.';
+    status.textContent=navigator.onLine
+      ? (error.message||'Kunde inte skicka just nu. Ring oss gärna på 08-410 441 02.')
+      : 'Du verkar sakna internetanslutning. Försök igen eller ring oss på 08-410 441 02.';
+    status.focus({preventScroll:true});
   }finally{
     submitButton.disabled=false;
     submitButton.removeAttribute('aria-busy');
@@ -98,7 +129,7 @@ form?.addEventListener('submit', async (event)=>{
 // Premium hero slideshow
 const heroSlides=[...document.querySelectorAll('.hero-slide')];
 let heroIndex=0;
-if(heroSlides.length>1){
+if(heroSlides.length>1&&!prefersReducedMotion){
   setInterval(()=>{
     heroSlides[heroIndex].classList.remove('active');
     heroIndex=(heroIndex+1)%heroSlides.length;
@@ -114,7 +145,7 @@ const moveFood=(direction)=>{
   if(!foodTrack)return;
   const card=foodTrack.querySelector('.food-card');
   const distance=(card?.getBoundingClientRect().width||420)+22;
-  foodTrack.scrollBy({left:direction*distance,behavior:'smooth'});
+  foodTrack.scrollBy({left:direction*distance,behavior:prefersReducedMotion?'auto':'smooth'});
 };
 prevButton?.addEventListener('click',()=>moveFood(-1));
 nextButton?.addEventListener('click',()=>moveFood(1));
@@ -122,6 +153,7 @@ nextButton?.addEventListener('click',()=>moveFood(1));
 let foodTimer;
 const startFoodAuto=()=>{
   clearInterval(foodTimer);
+  if(prefersReducedMotion||document.hidden)return;
   foodTimer=setInterval(()=>{
     if(!foodTrack)return;
     const nearEnd=foodTrack.scrollLeft+foodTrack.clientWidth>=foodTrack.scrollWidth-40;
@@ -131,6 +163,7 @@ const startFoodAuto=()=>{
 };
 foodTrack?.addEventListener('pointerdown',()=>clearInterval(foodTimer),{passive:true});
 foodTrack?.addEventListener('pointerup',startFoodAuto,{passive:true});
+document.addEventListener('visibilitychange',()=>document.hidden?clearInterval(foodTimer):startFoodAuto());
 startFoodAuto();
 
 
@@ -202,7 +235,7 @@ filterButtons.forEach(button=>button.addEventListener('click',()=>{
   activeFilter=button.dataset.menuFilter;
   filterButtons.forEach(btn=>btn.classList.toggle('active',btn===button));
   updateMenu();
-  document.getElementById('meny')?.scrollIntoView({behavior:'smooth',block:'start'});
+  document.getElementById('meny')?.scrollIntoView({behavior:prefersReducedMotion?'auto':'smooth',block:'start'});
 }));
 searchInput?.addEventListener('input',updateMenu);
 
@@ -212,15 +245,18 @@ const lightbox=document.getElementById('lightbox');
 const lightboxImg=lightbox?.querySelector('img');
 const lightboxCaption=lightbox?.querySelector('figcaption');
 let lightboxIndex=0;
+let lightboxTrigger=null;
 
 const showLightbox=(index)=>{
   if(!lightbox||!cards.length)return;
+  if(!lightbox.classList.contains('open'))lightboxTrigger=document.activeElement;
   lightboxIndex=(index+cards.length)%cards.length;
   const image=cards[lightboxIndex].querySelector('img');
   const caption=cards[lightboxIndex].querySelector('figcaption');
   lightboxImg.src=image.currentSrc||image.src;
   lightboxImg.alt=image.alt;
   lightboxCaption.textContent=caption?.textContent||'';
+  lightbox.removeAttribute('inert');
   lightbox.classList.add('open');
   lightbox.setAttribute('aria-hidden','false');
   document.body.style.overflow='hidden';
@@ -230,7 +266,9 @@ const closeLightbox=()=>{
   if(!lightbox)return;
   lightbox.classList.remove('open');
   lightbox.setAttribute('aria-hidden','true');
+  lightbox.setAttribute('inert','');
   document.body.style.overflow='';
+  if(lightboxTrigger instanceof HTMLElement)lightboxTrigger.focus();
 };
 cards.forEach((card,index)=>{
   card.addEventListener('click',()=>showLightbox(index));
@@ -249,13 +287,21 @@ document.addEventListener('keydown',event=>{
   if(event.key==='Escape')closeLightbox();
   if(event.key==='ArrowLeft')showLightbox(lightboxIndex-1);
   if(event.key==='ArrowRight')showLightbox(lightboxIndex+1);
+  if(event.key==='Tab'){
+    const controls=[...lightbox.querySelectorAll('button:not([disabled])')];
+    const first=controls[0],last=controls.at(-1);
+    if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus()}
+    if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus()}
+  }
 });
 
 
-// Ultimate V12 loader
-window.addEventListener('load',()=>{
-  setTimeout(()=>document.getElementById('site-loader')?.classList.add('hide'),450);
-});
+// Premium loader with a fallback so it can never cover the page indefinitely.
+const loader=document.getElementById('site-loader');
+const hideLoader=()=>loader?.classList.add('hide');
+if(document.readyState==='complete')setTimeout(hideLoader,180);
+else window.addEventListener('load',()=>setTimeout(hideLoader,180),{once:true});
+setTimeout(hideLoader,2200);
 
 // Desktop order dock
 const orderDock=document.querySelector('.desktop-order-dock');
@@ -278,6 +324,11 @@ const countObserver=new IntersectionObserver(entries=>{
     if(!entry.isIntersecting)return;
     const el=entry.target;
     const target=Number(el.dataset.count||0);
+    if(prefersReducedMotion){
+      el.textContent=target+'+';
+      countObserver.unobserve(el);
+      return;
+    }
     let current=0;
     const step=Math.max(1,Math.ceil(target/28));
     const timer=setInterval(()=>{
@@ -291,7 +342,7 @@ const countObserver=new IntersectionObserver(entries=>{
 countTargets.forEach(el=>countObserver.observe(el));
 
 // Gentle 3D tilt for food cards on pointer devices
-if(window.matchMedia('(pointer:fine)').matches){
+if(window.matchMedia('(pointer:fine)').matches&&!prefersReducedMotion){
   document.querySelectorAll('.food-card').forEach(card=>{
     card.addEventListener('mousemove',event=>{
       const rect=card.getBoundingClientRect();

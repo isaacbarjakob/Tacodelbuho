@@ -87,7 +87,9 @@ export async function onRequestPost({ request, env }) {
   const guestLabel = guests === 9 ? '9+ personer' : `${guests} ${guests === 1 ? 'person' : 'personer'}`;
   const extras = [highchair && 'Barnstol', birthday && 'Födelsedagsfirande'].filter(Boolean);
   const to = BOOKING_TO_EMAIL;
-  const from = env.RESEND_FROM_EMAIL || 'Taco del Búho <bokning@tacodelbuho.com>';
+  // Use Resend's verified test sender until tacodelbuho.com has been purchased
+  // and verified. RESEND_FROM_EMAIL can then be set to the custom-domain sender.
+  const from = env.RESEND_FROM_EMAIL || 'Taco del Búho <onboarding@resend.dev>';
   const subject = `Ny bokningsförfrågan: ${date} kl. ${time} – ${guestLabel}`;
   const text = [
     'NY BOKNINGSFÖRFRÅGAN', '',
