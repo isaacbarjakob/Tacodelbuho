@@ -20,3 +20,9 @@
 
 /sitemap.xml
   Content-Type: application/xml; charset=UTF-8
+
+/ll-admin-preview.html
+  ! X-Frame-Options
+  Content-Security-Policy: frame-ancestors 'self' https://ll-admin.pages.dev
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store

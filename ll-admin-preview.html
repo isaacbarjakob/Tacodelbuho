@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>LL Admin – privat testversion</title>
+</head>
+<body>
+  <p style="font:600 16px system-ui;padding:24px">Laddar privat testversion…</p>
+  <script>
+    (async () => {
+      try {
+        const response = await fetch('/index.html', { cache: 'no-store' });
+        if (!response.ok) throw new Error('Kunde inte läsa testversionen');
+
+        let html = await response.text();
+        html = html.replace(
+          /<meta\s+name=["']robots["']\s+content=["'][^"']*["']\s*\/?>/i,
+          '<meta name="robots" content="noindex,nofollow">',
+        );
+        html = html.replace(
+          /<\/body>/i,
+          '<script src="/ll-admin-adapter.js"><\/script></body>',
+        );
+
+        document.open();
+        document.write(html);
+        document.close();
+      } catch (error) {
+        document.body.innerHTML = '<main style="font-family:system-ui;padding:32px"><h1>Testversionen kunde inte laddas</h1><p>Livesidan är fortfarande orörd.</p></main>';
+        console.error(error);
+      }
+    })();
+  </script>
+</body>
+</html>
