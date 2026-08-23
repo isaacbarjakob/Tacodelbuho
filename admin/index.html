@@ -6,20 +6,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap">
-<link rel="stylesheet" href="admin.css"></head>
+<link rel="stylesheet" href="admin.css">
+<style>
+.menu-admin-category{margin:18px 0;padding:20px;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.035)}
+.menu-admin-head,.menu-admin-item-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.menu-admin-actions{display:flex;gap:7px;flex-wrap:wrap}.menu-admin-actions button{min-height:38px;padding:0 12px}.menu-admin-item{margin:12px 0;padding:15px;border:1px solid rgba(255,255,255,.09);border-radius:14px;background:rgba(0,0,0,.16)}.menu-admin-items{margin-top:14px}.menu-admin-item .grid3{display:grid;grid-template-columns:1fr 1fr 160px;gap:10px}.menu-admin-visible{display:flex!important;align-items:center;gap:9px}.menu-admin-visible input{width:auto}.menu-admin-category h3{margin:0}.menu-admin-help{opacity:.72;line-height:1.55}.danger-mini{background:transparent!important;border-color:rgba(255,100,100,.35)!important;color:#ffb2b2!important}@media(max-width:760px){.menu-admin-item .grid3{grid-template-columns:1fr}.menu-admin-category{padding:15px}.menu-admin-actions{width:100%}.menu-admin-actions button{flex:1}}
+</style></head>
 <body>
 <div class="shell">
   <aside><div class="brand"><img src="/assets/logo-512.webp" alt="" width="52" height="52"><div><strong>TACO DEL BÚHO</strong><span>ADMIN</span></div></div>
-    <nav aria-label="Adminsektioner"><button class="nav active" data-view="aktuellt" type="button">Aktuellt &amp; lunch</button><button class="nav" data-view="events" type="button">Event</button><button class="nav" data-view="hours" type="button">Öppettider</button></nav>
+    <nav aria-label="Adminsektioner"><button class="nav active" data-view="aktuellt" type="button">Veckans lunch / Aktuellt</button><button class="nav" data-view="menu" type="button">Meny</button><button class="nav" data-view="events" type="button">Event</button><button class="nav" data-view="hours" type="button">Öppettider</button></nav>
     <a class="site-link" href="/" target="_blank">Öppna hemsidan ↗</a>
   </aside>
   <main>
-    <header><div><p>ADMINPANEL</p><h1 id="page-title">Aktuellt &amp; lunch</h1></div><button id="logout" class="quiet" type="button">Logga ut</button></header>
+    <header><div><p>ADMINPANEL</p><h1 id="page-title">Veckans lunch / Aktuellt</h1></div><button id="logout" class="quiet" type="button">Logga ut</button></header>
     <section id="login" class="login-card"><h2>Logga in</h2><p>Använd adminlösenordet som är sparat i Cloudflare.</p><input id="password" type="password" placeholder="Adminlösenord" autocomplete="current-password" spellcheck="false"><button id="login-btn" class="primary" type="button">Logga in</button><p id="login-status" class="status"></p></section>
     <div id="app" hidden>
-      <div class="mobile-view-picker"><label for="mobile-view">Välj sektion</label><select id="mobile-view" aria-label="Välj adminsektion"><option value="aktuellt">Aktuellt &amp; lunch</option><option value="events">Event</option><option value="hours">Öppettider</option></select></div>
+      <div class="mobile-view-picker"><label for="mobile-view">Välj sektion</label><select id="mobile-view" aria-label="Välj adminsektion"><option value="aktuellt">Veckans lunch / Aktuellt</option><option value="menu">Meny</option><option value="events">Event</option><option value="hours">Öppettider</option></select></div>
       <section class="panel view" data-view-panel="aktuellt">
-        <div class="row toggle-row"><div><h2>Aktuellt på startsidan</h2><p>Veckans lunch, erbjudande eller nyhet.</p></div><label class="switch"><input id="offer-visible" type="checkbox"><span></span></label></div>
+        <div class="row toggle-row"><div><h2>Veckans lunch / Aktuellt</h2><p>Ändra lunch, erbjudande eller nyhet på startsidan.</p></div><label class="switch"><input id="offer-visible" type="checkbox"><span></span></label></div>
         <label>Överrubrik<input id="offer-kicker" type="text"></label><label>Rubrik<input id="offer-title" type="text"></label><label>Text<textarea id="offer-text"></textarea></label>
         <div class="grid2"><label>Knapptext<input id="offer-button-text" type="text"></label><label>Knappens länk<input id="offer-button-link" type="text" placeholder="#meny"></label></div>
         <div class="upload-field"><label for="offer-image">Bild</label><div class="upload-row"><input id="offer-image" type="text" placeholder="/assets/bild.webp"><input id="image-file" type="file" aria-label="Välj bildfil" accept="image/jpeg,image/png,image/webp,image/heic,image/heif"><button id="upload-btn" type="button" class="secondary">Ladda upp bild</button></div></div>
@@ -32,6 +36,10 @@
           <div><strong>Dator</strong><div class="preview-frame preview-desktop"><img id="image-preview" src="/assets/premium-spread.webp" alt="Förhandsvisning på dator"></div></div>
           <div><strong>Mobil</strong><div class="preview-frame preview-mobile"><img id="image-preview-mobile" src="/assets/premium-spread.webp" alt="Förhandsvisning på mobil"></div></div>
         </div>
+      </section>
+      <section class="panel view" data-view-panel="menu" hidden>
+        <div class="row"><div><h2>Restaurangmeny</h2><p class="menu-admin-help">Ändra kategorier, rätter, beskrivningar och priser. Du kan även dölja en rätt tillfälligt eller flytta ordningen.</p></div><button id="add-category" type="button" class="secondary">+ Lägg till kategori</button></div>
+        <div id="menu-editor"></div>
       </section>
       <section class="panel view" data-view-panel="events" hidden>
         <div class="row toggle-row"><div><h2>Sport &amp; event</h2><p>Upp till sex event visas på hemsidan.</p></div><label class="switch"><input id="events-visible" type="checkbox"><span></span></label></div>
