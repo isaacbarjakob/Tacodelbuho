@@ -5,12 +5,14 @@ let password=sessionStorage.getItem('taco_admin_password')||''; let content={}; 
 const api=async(path,options={})=>{const r=await fetch(path,{...options,headers:{...(options.headers||{}),'X-Admin-Password':password}});let data={};try{data=await r.json()}catch{}if(!r.ok)throw new Error(data.error||'Något gick fel');return data};
 const setStatus=(text,type='')=>{const el=$('#save-status');el.textContent=text;el.className=`status${type?` ${type}`:''}`};
 const markDirty=()=>{dirty=true;setStatus('Osparade ändringar','warning')};
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const slugify=v=>String(v||'').trim().toLocaleLowerCase('sv-SE').replace(/[åä]/g,'a').replace(/ö/g,'o').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 async function login(){password=$('#password').value.trim();$('#login-status').textContent='Kontrollerar…';try{await api('/api/admin/auth',{method:'POST'});await load();sessionStorage.setItem('taco_admin_password',password);showApp()}catch(e){$('#login-status').textContent=e.message}}
 async function load(){content=await api('/api/admin/content');fill()}
 function showApp(){$('#login').hidden=true;$('#app').hidden=false;$('#logout').hidden=false;setStatus('Allt är sparat.','success')}
 function updatePreview(){const src=$('#offer-image').value.trim();const fit=$('#offer-image-fit').value;const pos=$('#offer-image-position').value;['#image-preview','#image-preview-mobile'].forEach(sel=>{const img=$(sel);img.src=src;img.style.objectPosition=pos});$$('.preview-frame').forEach(el=>{el.classList.toggle('fit-contain',fit==='contain');el.classList.toggle('fit-cover',fit==='cover')})}
-function fill(){const a=content.aktuellt||{},e=content.events||{},s=content.settings||{};$('#offer-visible').checked=a.visible!==false;$('#offer-kicker').value=a.kicker||'';$('#offer-title').value=a.title||'';$('#offer-text').value=a.text||'';$('#offer-button-text').value=a.button_text||'';$('#offer-button-link').value=a.button_link||'';$('#offer-image').value=a.image||'';$('#offer-image-fit').value=a.image_fit==='cover'?'cover':'contain';$('#offer-image-position').value=['top','center','bottom'].includes(a.image_position)?a.image_position:'center';updatePreview();$('#events-visible').checked=e.visible!==false;renderEvents(e.events||[]);$('#hours-line1').value=s.hours?.line1||'';$('#hours-line2').value=s.hours?.line2||'';dirty=false}
-function gather(){return {aktuellt:{visible:$('#offer-visible').checked,kicker:$('#offer-kicker').value,title:$('#offer-title').value,text:$('#offer-text').value,image:$('#offer-image').value,image_alt:$('#offer-title').value,image_fit:$('#offer-image-fit').value,image_position:$('#offer-image-position').value,show_button:true,button_text:$('#offer-button-text').value,button_link:$('#offer-button-link').value},events:{visible:$('#events-visible').checked,events:$$('.event-card').map(card=>({type:card.querySelector('[data-f=type]').value,date:card.querySelector('[data-f=date]').value,title:card.querySelector('[data-f=title]').value,text:card.querySelector('[data-f=text]').value,time:card.querySelector('[data-f=time]').value,note:card.querySelector('[data-f=note]').value}))},settings:{hours:{line1:$('#hours-line1').value,line2:$('#hours-line2').value}}}}
+function fill(){const a=content.aktuellt||{},e=content.events||{},s=content.settings||{},m=content.menu||{};$('#offer-visible').checked=a.visible!==false;$('#offer-kicker').value=a.kicker||'';$('#offer-title').value=a.title||'';$('#offer-text').value=a.text||'';$('#offer-button-text').value=a.button_text||'';$('#offer-button-link').value=a.button_link||'';$('#offer-image').value=a.image||'';$('#offer-image-fit').value=a.image_fit==='cover'?'cover':'contain';$('#offer-image-position').value=['top','center','bottom'].includes(a.image_position)?a.image_position:'center';updatePreview();$('#events-visible').checked=e.visible!==false;renderEvents(e.events||[]);$('#hours-line1').value=s.hours?.line1||'';$('#hours-line2').value=s.hours?.line2||'';renderMenu(m.categories||[]);dirty=false}
+function gather(){return {aktuellt:{visible:$('#offer-visible').checked,kicker:$('#offer-kicker').value,title:$('#offer-title').value,text:$('#offer-text').value,image:$('#offer-image').value,image_alt:$('#offer-title').value,image_fit:$('#offer-image-fit').value,image_position:$('#offer-image-position').value,show_button:true,button_text:$('#offer-button-text').value,button_link:$('#offer-button-link').value},events:{visible:$('#events-visible').checked,events:$$('.event-card').map(card=>({type:card.querySelector('[data-f=type]').value,date:card.querySelector('[data-f=date]').value,title:card.querySelector('[data-f=title]').value,text:card.querySelector('[data-f=text]').value,time:card.querySelector('[data-f=time]').value,note:card.querySelector('[data-f=note]').value}))},settings:{hours:{line1:$('#hours-line1').value,line2:$('#hours-line2').value}},menu:gatherMenu()}}
 function renderEvents(events){const list=$('#event-list');list.innerHTML='';events.slice(0,6).forEach(event=>addEvent(event,false))}
 function addEvent(e={},shouldMark=true){
   if($$('.event-card').length>=6){setStatus('Max sex event kan visas samtidigt.','error');return}
@@ -21,7 +23,40 @@ function addEvent(e={},shouldMark=true){
   $('#event-list').appendChild(card);
   if(shouldMark)markDirty();
 }
-const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function moveElement(el,direction){const sibling=direction<0?el.previousElementSibling:el.nextElementSibling;if(!sibling)return;if(direction<0)el.parentNode.insertBefore(el,sibling);else el.parentNode.insertBefore(sibling,el);markDirty()}
+function renderMenu(categories){const editor=$('#menu-editor');editor.innerHTML='';categories.forEach(category=>addMenuCategory(category,false))}
+function addMenuCategory(category={},shouldMark=true){
+  const editor=$('#menu-editor');
+  const card=document.createElement('div');
+  card.className='menu-admin-category';
+  card.innerHTML=`<div class="menu-admin-head"><h3>Kategori</h3><div class="menu-admin-actions"><button type="button" class="secondary cat-up">↑ Upp</button><button type="button" class="secondary cat-down">↓ Ner</button><button type="button" class="secondary danger-mini cat-remove">Ta bort</button></div></div><div class="grid2"><label>Kategorinamn<input data-cf="title" value="${esc(category.title||'Ny kategori')}"></label><label>ID / länk<input data-cf="id" value="${esc(category.id||slugify(category.title||'ny-kategori'))}" placeholder="tacos"></label></div><div class="grid2"><label>Märkning, valfritt<input data-cf="badge" value="${esc(category.badge||'')}" placeholder="4 BITAR / 8 BITAR"></label><label class="menu-admin-visible">Visa kategorin <input data-cf="visible" type="checkbox" ${category.visible===false?'':'checked'}></label></div><label>Notering under kategorin<input data-cf="note" value="${esc(category.note||'')}" placeholder="Exempel: pommes + läsk 39 kr"></label><div class="menu-admin-items"></div><button type="button" class="secondary add-menu-item">+ Lägg till rätt</button>`;
+  editor.appendChild(card);
+  const items=card.querySelector('.menu-admin-items');
+  (category.items||[]).forEach(item=>addMenuItem(items,item,false));
+  card.querySelector('.cat-up').onclick=()=>moveElement(card,-1);
+  card.querySelector('.cat-down').onclick=()=>moveElement(card,1);
+  card.querySelector('.cat-remove').onclick=()=>{if(confirm('Ta bort hela kategorin och alla rätter i den?')){card.remove();markDirty()}};
+  card.querySelector('.add-menu-item').onclick=()=>addMenuItem(items,{},true);
+  if(shouldMark)markDirty();
+}
+function addMenuItem(container,item={},shouldMark=true){
+  const row=document.createElement('div');
+  row.className='menu-admin-item';
+  row.innerHTML=`<div class="menu-admin-item-head"><strong>Rätt</strong><div class="menu-admin-actions"><button type="button" class="secondary item-up">↑</button><button type="button" class="secondary item-down">↓</button><button type="button" class="secondary danger-mini item-remove">Ta bort</button></div></div><div class="grid3"><label>Namn<input data-mf="name" value="${esc(item.name||'')}"></label><label>Pris<input data-mf="price" value="${esc(item.price||'')}" placeholder="129 kr"></label><label class="menu-admin-visible">Visa <input data-mf="visible" type="checkbox" ${item.visible===false?'':'checked'}></label></div><label>Beskrivning<textarea data-mf="description">${esc(item.description||'')}</textarea></label>`;
+  container.appendChild(row);
+  row.querySelector('.item-up').onclick=()=>moveElement(row,-1);
+  row.querySelector('.item-down').onclick=()=>moveElement(row,1);
+  row.querySelector('.item-remove').onclick=()=>{row.remove();markDirty()};
+  if(shouldMark)markDirty();
+}
+function gatherMenu(){
+  const categories=$$('#menu-editor .menu-admin-category').map((card,index)=>{
+    const title=card.querySelector('[data-cf=title]').value.trim();
+    const rawId=card.querySelector('[data-cf=id]').value.trim();
+    return {id:slugify(rawId||title)||`kategori-${index+1}`,title:title||`Kategori ${index+1}`,visible:card.querySelector('[data-cf=visible]').checked,badge:card.querySelector('[data-cf=badge]').value.trim(),note:card.querySelector('[data-cf=note]').value.trim(),items:[...card.querySelectorAll('.menu-admin-item')].map(item=>({name:item.querySelector('[data-mf=name]').value.trim(),description:item.querySelector('[data-mf=description]').value.trim(),price:item.querySelector('[data-mf=price]').value.trim(),visible:item.querySelector('[data-mf=visible]').checked}))};
+  });
+  return {categories};
+}
 async function save(){setStatus('Publicerar…','loading');$('#save').disabled=true;try{await api('/api/admin/content',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(gather())});dirty=false;setStatus('Sparat! Hemsidan uppdateras inom någon minut.','success')}catch(e){setStatus(e.message,'error')}finally{$('#save').disabled=false}}
 async function optimizeImage(file){
   if(!file.type.startsWith('image/'))throw new Error('Välj en bildfil.');
@@ -41,23 +76,17 @@ async function upload(){const original=$('#image-file').files[0];if(!original)re
 function switchView(view){
   const btn=$(`.nav[data-view="${view}"]`);
   if(!btn)return;
-  $$('.nav').forEach(x=>{
-    const active=x.dataset.view===view;
-    x.classList.toggle('active',active);
-    if(active)x.setAttribute('aria-current','page');else x.removeAttribute('aria-current');
-  });
+  $$('.nav').forEach(x=>{const active=x.dataset.view===view;x.classList.toggle('active',active);if(active)x.setAttribute('aria-current','page');else x.removeAttribute('aria-current')});
   $$('.view').forEach(v=>v.hidden=v.dataset.viewPanel!==view);
   $('#page-title').textContent=btn.textContent;
   const picker=$('#mobile-view'); if(picker)picker.value=view;
-  if(window.innerWidth<=760){
-    $(`.view[data-view-panel="${view}"]`)?.scrollIntoView({behavior:'smooth',block:'start'});
-  }
+  if(window.innerWidth<=760)$(`.view[data-view-panel="${view}"]`)?.scrollIntoView({behavior:'smooth',block:'start'});
 }
 $$('.nav').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.view)));
 $('#mobile-view').addEventListener('change',e=>switchView(e.target.value));
 $('#app').addEventListener('input',event=>{if(event.target.closest('.view'))markDirty()});
 $('#app').addEventListener('change',event=>{if(event.target.closest('.view'))markDirty()});
 window.addEventListener('beforeunload',event=>{if(dirty){event.preventDefault();event.returnValue=''}});
-$('#login-btn').onclick=login;$('#password').onkeydown=e=>{if(e.key==='Enter')login()};$('#logout').onclick=()=>{if(dirty&&!confirm('Du har osparade ändringar. Vill du logga ut ändå?'))return;dirty=false;sessionStorage.clear();location.reload()};$('#save').onclick=save;$('#upload-btn').onclick=upload;$('#add-event').onclick=()=>addEvent();$('#offer-image').oninput=updatePreview;$('#offer-image-fit').onchange=updatePreview;$('#offer-image-position').onchange=updatePreview;
+$('#login-btn').onclick=login;$('#password').onkeydown=e=>{if(e.key==='Enter')login()};$('#logout').onclick=()=>{if(dirty&&!confirm('Du har osparade ändringar. Vill du logga ut ändå?'))return;dirty=false;sessionStorage.clear();location.reload()};$('#save').onclick=save;$('#upload-btn').onclick=upload;$('#add-event').onclick=()=>addEvent();$('#add-category').onclick=()=>addMenuCategory();$('#offer-image').oninput=updatePreview;$('#offer-image-fit').onchange=updatePreview;$('#offer-image-position').onchange=updatePreview;
 $('#logout').hidden=true;if(password){load().then(()=>showApp()).catch(()=>sessionStorage.clear())}
 })();
