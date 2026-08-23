@@ -167,3 +167,75 @@
 
   loadMenu();
 })();
+
+(() => {
+  'use strict';
+
+  const style = document.createElement('style');
+  style.textContent = `
+    .current-offer-media{position:relative;cursor:zoom-in!important}
+    .current-offer-media:after{content:'TRYCK FÖR ATT FÖRSTORA';position:absolute;right:18px;bottom:18px;padding:9px 12px;border:1px solid rgba(255,255,255,.32);border-radius:999px;background:rgba(7,5,4,.78);color:#fff;font:800 .66rem Montserrat,sans-serif;letter-spacing:.08em;pointer-events:none;backdrop-filter:blur(10px)}
+    .current-offer-media.fit-contain{min-height:520px!important}
+    .current-offer-media.fit-contain img{min-height:0!important;height:520px!important;object-fit:contain!important;padding:12px!important}
+    .lunch-image-viewer{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(0,0,0,.94);backdrop-filter:blur(9px)}
+    .lunch-image-viewer.open{display:flex}
+    .lunch-image-viewer img{display:block;max-width:min(1200px,96vw);max-height:91vh;width:auto;height:auto;object-fit:contain;box-shadow:0 28px 90px rgba(0,0,0,.55);touch-action:pinch-zoom}
+    .lunch-image-viewer button{position:fixed;z-index:2;top:max(15px,env(safe-area-inset-top));right:16px;width:48px;height:48px;border:1px solid rgba(255,255,255,.3);border-radius:50%;background:rgba(20,16,13,.88);color:#fff;font-size:28px;line-height:1;cursor:pointer}
+    .lunch-image-viewer-hint{position:fixed;left:50%;bottom:max(16px,env(safe-area-inset-bottom));transform:translateX(-50%);padding:9px 13px;border-radius:999px;background:rgba(20,16,13,.82);color:#fff;font:700 .68rem Montserrat,sans-serif;white-space:nowrap}
+    body.lunch-viewer-open{overflow:hidden!important}
+    @media(max-width:800px){
+      .current-offer-media{height:auto!important;min-height:360px!important;padding:8px!important}
+      .current-offer-media.fit-contain{min-height:400px!important}
+      .current-offer-media.fit-contain img{height:auto!important;min-height:0!important;max-height:68vh!important;width:100%!important;padding:0!important}
+      .current-offer-media:after{right:12px;bottom:12px;font-size:.6rem;padding:8px 10px}
+      .lunch-image-viewer{padding:8px}
+      .lunch-image-viewer img{max-width:98vw;max-height:88vh}
+    }
+  `;
+  document.head.appendChild(style);
+
+  const image = document.getElementById('cms-offer-image');
+  const media = document.querySelector('.current-offer-media');
+  if (!image || !media) return;
+
+  image.tabIndex = 0;
+  image.setAttribute('role','button');
+  image.setAttribute('aria-label','Förstora veckans lunchbild');
+
+  const viewer = document.createElement('div');
+  viewer.className = 'lunch-image-viewer';
+  viewer.setAttribute('aria-hidden','true');
+  viewer.innerHTML = `<button type="button" aria-label="Stäng förstorad bild">×</button><img alt=""><span class="lunch-image-viewer-hint">Nyp för att zooma · tryck utanför för att stänga</span>`;
+  document.body.appendChild(viewer);
+  const viewerImage = viewer.querySelector('img');
+  const close = viewer.querySelector('button');
+  let lastFocus = null;
+
+  const openViewer = () => {
+    if (!image.src) return;
+    lastFocus = document.activeElement;
+    viewerImage.src = image.currentSrc || image.src;
+    viewerImage.alt = image.alt || 'Veckans lunch';
+    viewer.classList.add('open');
+    viewer.setAttribute('aria-hidden','false');
+    document.body.classList.add('lunch-viewer-open');
+    close.focus({preventScroll:true});
+  };
+  const closeViewer = () => {
+    viewer.classList.remove('open');
+    viewer.setAttribute('aria-hidden','true');
+    document.body.classList.remove('lunch-viewer-open');
+    if (lastFocus instanceof HTMLElement) lastFocus.focus({preventScroll:true});
+  };
+
+  media.addEventListener('click', openViewer);
+  image.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openViewer();
+    }
+  });
+  close.addEventListener('click', closeViewer);
+  viewer.addEventListener('click', event => { if (event.target === viewer) closeViewer(); });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && viewer.classList.contains('open')) closeViewer(); });
+})();
