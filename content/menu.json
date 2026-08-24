@@ -7,9 +7,24 @@
       "badge": "",
       "note": "",
       "items": [
-        {"name":"Pommes dipptallrik","description":"Pommes frites, 2 valfria dippar","price":"99 kr","visible":true},
-        {"name":"Búhos nacho tallrik","description":"Nachochips med smält ost, salsa, gräddfil och guacamole","price":"99 kr","visible":true},
-        {"name":"Snack Box","description":"4 Chili Cheese, 4 lökringar, 4 mozzarella sticks och valfri dipp","price":"89 kr","visible":true}
+        {
+          "name": "Pommes dipptallrik",
+          "description": "Pommes frites, 2 valfria dippar",
+          "price": "99 kr",
+          "visible": true
+        },
+        {
+          "name": "Búhos nacho tallrik",
+          "description": "Nachochips med smält ost, salsa, gräddfil och guacamole",
+          "price": "99 kr",
+          "visible": true
+        },
+        {
+          "name": "Snack Box",
+          "description": "4 Chili Cheese, 4 lökringar, 4 mozzarella sticks och valfri dipp",
+          "price": "89 kr",
+          "visible": true
+        }
       ]
     },
     {
@@ -19,9 +34,24 @@
       "badge": "",
       "note": "Välj mellan köttfärs, kyckling eller bönor.",
       "items": [
-        {"name":"Taco Normal","description":"Tre mjuka bröd med valfri fyllning. Lök, ost, tomat, gurka, majs, sallad, salsa och vitlökssås/gräddfil","price":"119 kr","visible":true},
-        {"name":"Taco Wrap","description":"Valfri fyllning. Sallad, tomat, gurka, lök, majs, ost, salsa och vitlökssås/gräddfil","price":"129 kr","visible":true},
-        {"name":"Crispy Taco Wrap","description":"Friterad kyckling wrap stekt i smält ost, insvept i en rostad tortilla med sallad, gurka, tomat, lök och majs, fyllig vitlökssås och srirachamajonnäs","price":"139 kr","visible":true}
+        {
+          "name": "Taco Normal",
+          "description": "Tre mjuka bröd med valfri fyllning. Lök, ost, tomat, gurka, majs, sallad, salsa och vitlökssås/gräddfil",
+          "price": "119 kr",
+          "visible": true
+        },
+        {
+          "name": "Taco Wrap",
+          "description": "Valfri fyllning. Sallad, tomat, gurka, lök, majs, ost, salsa och vitlökssås/gräddfil",
+          "price": "129 kr",
+          "visible": true
+        },
+        {
+          "name": "Crispy Taco Wrap",
+          "description": "Friterad kyckling wrap stekt i smält ost, insvept i en rostad tortilla med sallad, gurka, tomat, lök och majs, fyllig vitlökssås och srirachamajonnäs",
+          "price": "139 kr",
+          "visible": true
+        }
       ]
     },
     {
@@ -31,10 +61,30 @@
       "badge": "4 ST / 8 ST",
       "note": "Välj mellan 4 st eller 8 st.",
       "items": [
-        {"name":"Kyckling/Köttfärs","description":"Kyckling/köttfärs och smält ost i tortillabröd, serveras med tortillachips, salsa, gräddfil och guacamole","price":"129 / 149 kr","visible":true},
-        {"name":"Ost","description":"Smält ost i tortillabröd, serveras med tortillachips, salsa, gräddfil och guacamole","price":"119 / 129 kr","visible":true},
-        {"name":"Crispy Chicken","description":"Fyllda med crème fraîche, ostsås, riven ost, jalapeños och bitar av friterad kyckling. Stekta tills krispiga och serveras med nachochips, gräddfil, salsa och guacamole","price":"149 / 179 kr","visible":true},
-        {"name":"Crispy Garlic Quesadillas","description":"Gyllenstekta quesadillas fyllda med krämig crème fraîche, friterad kyckling, ost, vitlökssås och majs. Serveras med salsa, gräddfil och guacamole","price":"149 / 179 kr","visible":true}
+        {
+          "name": "Kyckling/Köttfärs",
+          "description": "Kyckling/köttfärs och smält ost i tortillabröd, serveras med tortillachips, salsa, gräddfil och guacamole",
+          "price": "129 / 149 kr",
+          "visible": true
+        },
+        {
+          "name": "Ost",
+          "description": "Smält ost i tortillabröd, serveras med tortillachips, salsa, gräddfil och guacamole",
+          "price": "119 / 129 kr",
+          "visible": true
+        },
+        {
+          "name": "Crispy Chicken",
+          "description": "Fyllda med crème fraîche, ostsås, riven ost, jalapeños och bitar av friterad kyckling. Stekta tills krispiga och serveras med nachochips, gräddfil, salsa och guacamole",
+          "price": "149 / 179 kr",
+          "visible": true
+        },
+        {
+          "name": "Crispy Garlic Quesadillas",
+          "description": "Gyllenstekta quesadillas fyllda med krämig crème fraîche, friterad kyckling, ost, vitlökssås och majs. Serveras med salsa, gräddfil och guacamole",
+          "price": "149 / 179 kr",
+          "visible": true
+        }
       ]
     },
     {
@@ -44,10 +94,30 @@
       "badge": "",
       "note": "Välj mellan köttfärs, kyckling eller bönor där valfri fyllning anges.",
       "items": [
-        {"name":"Búhos","description":"Valfri fyllning med ost, salsa, vitlökssås/gräddfil, sallad, tomat, gurka och Mexican Rice","price":"129 kr","visible":true},
-        {"name":"Búho Lux","description":"Crispy Chicken med ost, srirachamayo, gräddfil, sallad, tomat, gurka, majs, lök och Mexican Rice","price":"139 kr","visible":true},
-        {"name":"Shrimp","description":"Crispiga friterade räkor med ost, srirachamayo, sallad, tomat, gurka, majs, lök och Mexican Rice","price":"139 kr","visible":true},
-        {"name":"Halloumi Burrito","description":"Friterad halloumi med srirachamajonnäs, sallad, tomat, gurka, majs, lök och mexikanskt ris","price":"139 kr","visible":true}
+        {
+          "name": "Búhos",
+          "description": "Valfri fyllning med ost, salsa, vitlökssås/gräddfil, sallad, tomat, gurka och Mexican Rice",
+          "price": "129 kr",
+          "visible": true
+        },
+        {
+          "name": "Búho Lux",
+          "description": "Crispy Chicken med ost, srirachamayo, gräddfil, sallad, tomat, gurka, majs, lök och Mexican Rice",
+          "price": "139 kr",
+          "visible": true
+        },
+        {
+          "name": "Shrimp",
+          "description": "Crispiga friterade räkor med ost, srirachamayo, sallad, tomat, gurka, majs, lök och Mexican Rice",
+          "price": "139 kr",
+          "visible": true
+        },
+        {
+          "name": "Halloumi Burrito",
+          "description": "Friterad halloumi med srirachamajonnäs, sallad, tomat, gurka, majs, lök och mexikanskt ris",
+          "price": "139 kr",
+          "visible": true
+        }
       ]
     },
     {
@@ -57,9 +127,24 @@
       "badge": "90 G / 180 G",
       "note": "Meny (pommes frites + 33 cl läsk) 49 kr.",
       "items": [
-        {"name":"Cheese Smash","description":"Saftig 180/90 grams nötfärsburgare med rostad lök, bröd, ost, sallad, tomat och tryffelmajonnäs","price":"105 / 145 kr","visible":true},
-        {"name":"Mexicana","description":"Saftig 180/90 grams nötfärsburgare med guacamole, nachochips, ost och jalapeños","price":"105 / 145 kr","visible":true},
-        {"name":"El Bandido","description":"Saftig 90 g / 180 g nötfärsburgare med krispig bacon, BBQ-sås och tryffelmajonnäs","price":"110 / 155 kr","visible":true}
+        {
+          "name": "Cheese Smash",
+          "description": "Saftig 180/90 grams nötfärsburgare med rostad lök, bröd, ost, sallad, tomat och tryffelmajonnäs",
+          "price": "105 / 145 kr",
+          "visible": true
+        },
+        {
+          "name": "Mexicana",
+          "description": "Saftig 180/90 grams nötfärsburgare med guacamole, nachochips, ost och jalapeños",
+          "price": "105 / 145 kr",
+          "visible": true
+        },
+        {
+          "name": "El Bandido",
+          "description": "Saftig 90 g / 180 g nötfärsburgare med krispig bacon, BBQ-sås och tryffelmajonnäs",
+          "price": "110 / 155 kr",
+          "visible": true
+        }
       ]
     },
     {
@@ -69,8 +154,18 @@
       "badge": "",
       "note": "Välj mellan köttfärs, kyckling eller bönor där valfri fyllning anges.",
       "items": [
-        {"name":"Ensalada da Nacho","description":"Valfri fyllning med smält ost, nachochips, sallad, lök, tomat, gurka, salsa och vitlökssås/gräddfil","price":"139 kr","visible":true},
-        {"name":"Crispy Nacho","description":"Friterad kyckling med nachochips, riven ost och smält ost. Toppas med gurka, majs, jalapeños, picklad lök och srirachamayo","price":"149 kr","visible":true}
+        {
+          "name": "Ensalada da Nacho",
+          "description": "Valfri fyllning med smält ost, nachochips, sallad, lök, tomat, gurka, salsa och vitlökssås/gräddfil",
+          "price": "139 kr",
+          "visible": true
+        },
+        {
+          "name": "Crispy Nacho",
+          "description": "Friterad kyckling med nachochips, riven ost och smält ost. Toppas med gurka, majs, jalapeños, picklad lök och srirachamayo",
+          "price": "149 kr",
+          "visible": true
+        }
       ]
     },
     {
@@ -80,10 +175,30 @@
       "badge": "",
       "note": "",
       "items": [
-        {"name":"Street Taco","description":"Valfri fyllning, sallad, tomat, gurka, lök, majs, ost, salsa och vitlökssås/gräddfil","price":"45 kr","visible":true},
-        {"name":"Crispy Chicken","description":"Rödkål, jalapeños, picklad lök, lime och srirachamayo","price":"50 kr","visible":true},
-        {"name":"Halloumi","description":"Sallad, gurka, tomat, picklad lök, srirachamayo och lime","price":"50 kr","visible":true},
-        {"name":"Friterade räkor","description":"Rödkål, jalapeños, picklad lök, lime och srirachamayo","price":"50 kr","visible":true}
+        {
+          "name": "Street Taco",
+          "description": "Valfri fyllning, sallad, tomat, gurka, lök, majs, ost, salsa och vitlökssås/gräddfil",
+          "price": "45 kr",
+          "visible": true
+        },
+        {
+          "name": "Crispy Chicken",
+          "description": "Rödkål, jalapeños, picklad lök, lime och srirachamayo",
+          "price": "50 kr",
+          "visible": true
+        },
+        {
+          "name": "Halloumi",
+          "description": "Sallad, gurka, tomat, picklad lök, srirachamayo och lime",
+          "price": "50 kr",
+          "visible": true
+        },
+        {
+          "name": "Friterade räkor",
+          "description": "Rödkål, jalapeños, picklad lök, lime och srirachamayo",
+          "price": "50 kr",
+          "visible": true
+        }
       ]
     },
     {
@@ -93,9 +208,24 @@
       "badge": "3 ST",
       "note": "",
       "items": [
-        {"name":"Crispy Chicken","description":"Friterad kyckling med rödkål, picklad lök, jalapeños, lime, srirachamayo och guacamole","price":"149 kr","visible":true},
-        {"name":"Shrimp","description":"Crispiga friterade räkor med rödkål, picklad lök, jalapeños, lime, srirachamayo och guacamole","price":"149 kr","visible":true},
-        {"name":"Halloumi","description":"Friterad halloumi med rödkål, picklad lök, jalapeños, lime, srirachamayo och guacamole","price":"149 kr","visible":true}
+        {
+          "name": "Crispy Chicken",
+          "description": "Friterad kyckling med rödkål, picklad lök, jalapeños, lime, srirachamayo och guacamole",
+          "price": "149 kr",
+          "visible": true
+        },
+        {
+          "name": "Shrimp",
+          "description": "Crispiga friterade räkor med rödkål, picklad lök, jalapeños, lime, srirachamayo och guacamole",
+          "price": "149 kr",
+          "visible": true
+        },
+        {
+          "name": "Halloumi",
+          "description": "Friterad halloumi med rödkål, picklad lök, jalapeños, lime, srirachamayo och guacamole",
+          "price": "149 kr",
+          "visible": true
+        }
       ]
     },
     {
@@ -105,9 +235,24 @@
       "badge": "",
       "note": "Till barnmenyn ingår en Festis.",
       "items": [
-        {"name":"Tacos 2 st","description":"Mjukt tortillabröd/nachochips med valfri fyllning av köttfärs eller fajitas, gurka, majs, ost och gräddfil","price":"79 kr","visible":true},
-        {"name":"Nacho Tallrik","description":"Nachochips med valfri fyllning av köttfärs eller fajitas, gurka, majs, ost och gräddfil","price":"79 kr","visible":true},
-        {"name":"Hamburgare & pommes 45 g","description":"Ost, tomat och sallad med ketchup","price":"79 kr","visible":true}
+        {
+          "name": "Tacos 2 st",
+          "description": "Mjukt tortillabröd/nachochips med valfri fyllning av köttfärs eller fajitas, gurka, majs, ost och gräddfil",
+          "price": "79 kr",
+          "visible": true
+        },
+        {
+          "name": "Nacho Tallrik",
+          "description": "Nachochips med valfri fyllning av köttfärs eller fajitas, gurka, majs, ost och gräddfil",
+          "price": "79 kr",
+          "visible": true
+        },
+        {
+          "name": "Hamburgare & pommes 45 g",
+          "description": "Ost, tomat och sallad med ketchup",
+          "price": "79 kr",
+          "visible": true
+        }
       ]
     },
     {
@@ -117,14 +262,54 @@
       "badge": "",
       "note": "",
       "items": [
-        {"name":"Nachos chips","description":"","price":"35 kr","visible":true},
-        {"name":"Guacamole","description":"","price":"25 kr","visible":true},
-        {"name":"Ostdipp","description":"","price":"19 kr","visible":true},
-        {"name":"Salsa / Salsa Hot","description":"","price":"19 kr","visible":true},
-        {"name":"Gräddfil","description":"","price":"19 kr","visible":true},
-        {"name":"Tryffelmajonnäs","description":"","price":"25 kr","visible":true},
-        {"name":"Crème fraîche","description":"","price":"19 kr","visible":true},
-        {"name":"Vitlökssås","description":"","price":"19 kr","visible":true}
+        {
+          "name": "Nachos chips",
+          "description": "",
+          "price": "35 kr",
+          "visible": true
+        },
+        {
+          "name": "Guacamole",
+          "description": "",
+          "price": "25 kr",
+          "visible": true
+        },
+        {
+          "name": "Ostdipp",
+          "description": "",
+          "price": "19 kr",
+          "visible": true
+        },
+        {
+          "name": "Salsa / Salsa Hot",
+          "description": "",
+          "price": "19 kr",
+          "visible": true
+        },
+        {
+          "name": "Gräddfil",
+          "description": "",
+          "price": "19 kr",
+          "visible": true
+        },
+        {
+          "name": "Tryffelmajonnäs",
+          "description": "",
+          "price": "25 kr",
+          "visible": true
+        },
+        {
+          "name": "Crème fraîche",
+          "description": "",
+          "price": "19 kr",
+          "visible": true
+        },
+        {
+          "name": "Vitlökssås",
+          "description": "",
+          "price": "19 kr",
+          "visible": true
+        }
       ]
     },
     {
@@ -134,7 +319,12 @@
       "badge": "",
       "note": "",
       "items": [
-        {"name":"Churros med chokladsås","description":"","price":"79 kr","visible":true}
+        {
+          "name": "Churros med chokladsås",
+          "description": "",
+          "price": "79 kr",
+          "visible": true
+        }
       ]
     },
     {
@@ -144,12 +334,42 @@
       "badge": "",
       "note": "",
       "items": [
-        {"name":"Pepsi","description":"","price":"29 kr","visible":true},
-        {"name":"Pepsi Max","description":"","price":"29 kr","visible":true},
-        {"name":"Seven Up","description":"","price":"29 kr","visible":true},
-        {"name":"Zingo","description":"","price":"29 kr","visible":true},
-        {"name":"Ramlösa","description":"","price":"29 kr","visible":true},
-        {"name":"Redbull","description":"","price":"39 kr","visible":true}
+        {
+          "name": "Pepsi",
+          "description": "",
+          "price": "29 kr",
+          "visible": true
+        },
+        {
+          "name": "Pepsi Max",
+          "description": "",
+          "price": "29 kr",
+          "visible": true
+        },
+        {
+          "name": "Seven Up",
+          "description": "",
+          "price": "29 kr",
+          "visible": true
+        },
+        {
+          "name": "Zingo",
+          "description": "",
+          "price": "29 kr",
+          "visible": true
+        },
+        {
+          "name": "Ramlösa",
+          "description": "",
+          "price": "29 kr",
+          "visible": true
+        },
+        {
+          "name": "Redbull",
+          "description": "",
+          "price": "39 kr",
+          "visible": true
+        }
       ]
     }
   ]
