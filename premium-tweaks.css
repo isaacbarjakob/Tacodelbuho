@@ -1,0 +1,68 @@
+/* Små visuella finjusteringar – 2026-09-14 */
+
+/* Den fasta Foodora-knappen är huvud-CTA. Undvik en tredje beställningslänk i topbaren. */
+@media (min-width:801px){
+  .topbar{
+    min-height:32px!important;
+    padding-top:7px!important;
+    padding-bottom:7px!important;
+    justify-content:center!important;
+  }
+  .topbar>a{display:none!important}
+
+  /* Ge matbilden mer luft utan att tappa den starka rubriken. */
+  .premium-hero .hero-copy{
+    max-width:680px!important;
+  }
+  .premium-hero .hero-logo{
+    width:108px!important;
+    height:108px!important;
+    margin-bottom:14px!important;
+  }
+  .premium-hero h1{
+    font-size:clamp(60px,8.35vw,124px)!important;
+    line-height:.93!important;
+    letter-spacing:.5px!important;
+  }
+  .premium-hero .hero-copy>p:not(.kicker){
+    max-width:510px!important;
+    font-size:17px!important;
+  }
+  .premium-badge{
+    margin-top:10px!important;
+    margin-bottom:20px!important;
+  }
+
+  /* Mindre massiv övergång efter hero. */
+  .statement{
+    padding:20px 7vw!important;
+    min-height:92px!important;
+  }
+  .statement p{
+    font-size:clamp(19px,2.45vw,32px)!important;
+    line-height:1.12!important;
+  }
+  .statement span{
+    font-size:42px!important;
+  }
+}
+
+/* Behåll den kompakta känslan även på mindre skärmar. */
+@media (max-width:800px){
+  .premium-hero h1{
+    font-size:clamp(54px,18vw,82px)!important;
+    line-height:.92!important;
+  }
+  .premium-hero .hero-copy>p:not(.kicker){
+    font-size:15px!important;
+    line-height:1.5!important;
+  }
+  .statement{
+    min-height:auto!important;
+    padding:16px 18px!important;
+  }
+  .statement p{
+    font-size:.96rem!important;
+    line-height:1.3!important;
+  }
+}
