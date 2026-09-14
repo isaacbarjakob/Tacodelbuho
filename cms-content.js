@@ -6,6 +6,11 @@
   css.href = "/site-upgrades.css?v=20260914-3";
   document.head.appendChild(css);
 
+  const polish = document.createElement("link");
+  polish.rel = "stylesheet";
+  polish.href = "/premium-tweaks.css?v=20260914-1";
+  document.head.appendChild(polish);
+
   const loader = document.getElementById("site-loader");
   if (loader && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const started = performance.now();
