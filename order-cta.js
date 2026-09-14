@@ -1,14 +1,21 @@
 (() => {
   "use strict";
 
-  // Remove the old ordering docks so only one persistent CTA is shown.
-  document.querySelectorAll(".desktop-order-dock, .mobile-actions").forEach((element) => element.remove());
+  const removeLegacyOrderUi = () => {
+    document.querySelectorAll(".desktop-order-dock, .mobile-actions").forEach((element) => element.remove());
+  };
+
+  removeLegacyOrderUi();
+
+  // Skydd mot äldre script/cache som skulle försöka lägga tillbaka de gamla knapparna.
+  const legacyObserver = new MutationObserver(removeLegacyOrderUi);
+  legacyObserver.observe(document.documentElement, { childList: true, subtree: true });
 
   if (document.getElementById("floating-order-cta")) return;
 
   const style = document.createElement("style");
   style.textContent = `
-    .desktop-order-dock,.mobile-actions{display:none!important}
+    .desktop-order-dock,.mobile-actions{display:none!important;visibility:hidden!important}
     .floating-order-cta{
       position:fixed;
       right:22px;
@@ -65,7 +72,6 @@
       }
       .floating-order-cta__copy strong{font-size:.9rem}
       .floating-order-cta__copy small{font-size:.61rem}
-      #nav.open ~ .floating-order-cta{display:none}
     }
     @media(prefers-reduced-motion:reduce){.floating-order-cta{transition:none}}
   `;
