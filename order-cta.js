@@ -1,10 +1,14 @@
 (() => {
   "use strict";
 
+  // Remove the old ordering docks so only one persistent CTA is shown.
+  document.querySelectorAll(".desktop-order-dock, .mobile-actions").forEach((element) => element.remove());
+
   if (document.getElementById("floating-order-cta")) return;
 
   const style = document.createElement("style");
   style.textContent = `
+    .desktop-order-dock,.mobile-actions{display:none!important}
     .floating-order-cta{
       position:fixed;
       right:22px;
