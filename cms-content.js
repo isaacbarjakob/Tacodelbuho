@@ -3,7 +3,7 @@
 
   const css = document.createElement("link");
   css.rel = "stylesheet";
-  css.href = "/site-upgrades.css?v=20260823-2";
+  css.href = "/site-upgrades.css?v=20260914-1";
   document.head.appendChild(css);
 
   const loader = document.getElementById("site-loader");
@@ -24,8 +24,12 @@
   }
 
   const upgrades = document.createElement("script");
-  upgrades.src = "/site-upgrades.js?v=20260823-2";
+  upgrades.src = "/site-upgrades.js?v=20260914-1";
   document.head.appendChild(upgrades);
+
+  const orderCta = document.createElement("script");
+  orderCta.src = "/order-cta.js?v=20260914-1";
+  document.head.appendChild(orderCta);
 })();
 
 (() => {
