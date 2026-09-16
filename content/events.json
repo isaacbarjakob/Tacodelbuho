@@ -2,12 +2,20 @@
   "visible": true,
   "events": [
     {
-      "type": "PETER ANDREE LIVE & KARAOKE",
-      "date": "4 september",
-      "title": "PETER ANDREE LIVE & KARAOKE",
-      "text": "🎤 Peter Live & Karaoke på Taco del Búho! 🦉\nDenna dag höjer vi stämningen med en kväll fylld av livemusik, karaoke, god mat och härlig atmosfär!\nPeter står för underhållningen och sätter tempot – sedan är det din tur att ta plats bakom mikrofonen. Samla vännerna, familjen eller kollegorna och njut av en kväll med skratt, sång och riktigt god mat.\n🌮 God mat & kalla drycker\n🎤 Peter Live\n🎙️ Karaoke för alla som vill sjunga\n🍹 Skön stämning hela kvällen\n⚠️ Platserna är begränsade, så boka bord i tid!",
+      "type": "LIVE & KARAOKE",
+      "date": "18/9",
+      "title": "LIVE & KARAOKE",
+      "text": "🎤 Karaoke & livemusik! 🎶\n\nHäng med vår grymma värd Peter – ta mikrofonen och sjung loss, eller luta dig tillbaka och njut av musiken!\n\nTid 19:00-23:00\n\nVälkommen till en härlig kväll fylld med skön stämning, god mat och kalla drycker. 🍔🍺\n\nVi ses på Taco del Búho! 🦉",
       "time": "19:00-23:00",
       "note": "Boka gärna bord"
+    },
+    {
+      "type": "QUIZ KVÄLL",
+      "date": "25/9",
+      "title": "QUIZKVÄLL",
+      "text": "🦉 Varmt välkomna till våra populära quizkvällar!\n\nVåra quizvärdar är redo – är ni? 🎤🧠\n\nMaten är redo, kylarna är fyllda och frågorna är laddade! 🌮🍻\n\n📅 Fredag 25 september\n⏰ Kl. 20.00–23.00\n\nBoka ert bord i god tid – vi ses på Taco del Búho! 🔥",
+      "time": "20:00-23:00",
+      "note": "Boka bord"
     }
   ]
 }
