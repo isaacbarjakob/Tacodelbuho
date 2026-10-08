@@ -8,7 +8,7 @@
 
   const polish = document.createElement("link");
   polish.rel = "stylesheet";
-  polish.href = "/premium-tweaks.css?v=20260914-1";
+  polish.href = "/premium-tweaks.css?v=20261008-1";
   document.head.appendChild(polish);
 
   const loader = document.getElementById("site-loader");
