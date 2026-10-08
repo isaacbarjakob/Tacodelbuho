@@ -47,6 +47,121 @@
   }
 }
 
+/* Boka bord – desktop. Återställ den gamla generella div-grid-regeln och ge formuläret riktiga proportioner. */
+@media (min-width:1001px){
+  .booking-premium{
+    grid-template-columns:minmax(360px,.82fr) minmax(600px,1.18fr)!important;
+    gap:clamp(48px,6vw,92px)!important;
+    align-items:center!important;
+    padding:88px max(5vw,calc((100vw - 1420px)/2)) 96px!important;
+  }
+
+  .booking-copy{
+    max-width:520px!important;
+    align-self:center!important;
+  }
+
+  .booking-copy h2{
+    font-size:clamp(4.2rem,6.2vw,6.7rem)!important;
+    line-height:.94!important;
+  }
+
+  .booking-copy>p:not(.kicker){
+    max-width:500px!important;
+  }
+
+  .booking-form{
+    width:100%!important;
+    max-width:760px!important;
+    justify-self:end!important;
+    align-self:center!important;
+    padding:34px 38px 38px!important;
+    border-radius:26px!important;
+  }
+
+  /* Viktig buggrättning: den här div:en fick tidigare grid och gjorde rubriken lodrät. */
+  .booking-form .form-heading{
+    display:flex!important;
+    align-items:flex-start!important;
+    justify-content:space-between!important;
+    gap:24px!important;
+    margin-bottom:24px!important;
+    padding-bottom:20px!important;
+  }
+
+  .booking-form .form-heading>div{
+    display:block!important;
+    width:auto!important;
+    min-width:0!important;
+    grid-template-columns:none!important;
+  }
+
+  .booking-form .form-heading h3{
+    display:block!important;
+    margin:6px 0 0!important;
+    font-size:clamp(2rem,2.7vw,2.8rem)!important;
+    line-height:1!important;
+    letter-spacing:.02em!important;
+    white-space:nowrap!important;
+    word-break:normal!important;
+    overflow-wrap:normal!important;
+  }
+
+  .booking-form .form-eyebrow{
+    display:block!important;
+    white-space:nowrap!important;
+  }
+
+  .booking-form .required-note{
+    flex:0 0 auto!important;
+    margin-top:2px!important;
+  }
+
+  .booking-form .field-grid{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:15px!important;
+  }
+
+  .booking-form .field-grid-three{
+    grid-template-columns:1.05fr .72fr .82fr!important;
+  }
+
+  .booking-form .booking-notice{
+    display:block!important;
+  }
+
+  .booking-form input,
+  .booking-form select,
+  .booking-form textarea{
+    min-height:50px!important;
+  }
+
+  .booking-form textarea{
+    min-height:112px!important;
+  }
+
+  .booking-form>.field,
+  .booking-form>.field-grid,
+  .booking-form .booking-options,
+  .booking-form .booking-notice{
+    margin-bottom:16px!important;
+  }
+}
+
+/* Mellanstora datorer/laptops – håll formuläret luftigt utan att bli för smalt. */
+@media (min-width:801px) and (max-width:1000px){
+  .booking-form .form-heading>div{
+    display:block!important;
+    grid-template-columns:none!important;
+  }
+  .booking-form .form-heading h3{
+    white-space:normal!important;
+    word-break:normal!important;
+    overflow-wrap:normal!important;
+  }
+}
+
 /* Behåll den kompakta känslan även på mindre skärmar. */
 @media (max-width:800px){
   .premium-hero h1{
