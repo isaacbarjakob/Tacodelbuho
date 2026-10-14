@@ -2,18 +2,10 @@
   "visible": true,
   "events": [
     {
-      "type": "LIVE & KARAOKE",
-      "date": "Fredag 18/9",
-      "title": "LIVE & KARAOKE",
-      "text": "🎤 Karaoke & livemusik! 🎶\n\nHäng med vår grymma värd Peter – ta mikrofonen och sjung loss, eller luta dig tillbaka och njut av musiken!\n\nTid 19:00-23:00\n\nVälkommen till en härlig kväll fylld med skön stämning, god mat och kalla drycker. 🍔🍺\n\nVi ses på Taco del Búho! 🦉",
-      "time": "19:00-23:00",
-      "note": "Boka gärna bord"
-    },
-    {
       "type": "QUIZ KVÄLL",
-      "date": "Fredag 25/9",
+      "date": "Fredag 30/10",
       "title": "QUIZKVÄLL",
-      "text": "🦉 Varmt välkomna till våra populära quizkvällar!\n\nVåra quizvärdar är redo – är ni? 🎤🧠\n\nMaten är redo, kylarna är fyllda och frågorna är laddade! 🌮🍻\n\n📅 Fredag 25 september\n⏰ Kl. 20.00–23.00\n\nBoka ert bord i god tid – vi ses på Taco del Búho! 🔥",
+      "text": "🦉 Varmt välkomna till våra populära quizkvällar!\n\nVåra quizvärdar är redo – är ni? 🎤🧠\n\nMaten är redo, kylarna är fyllda och frågorna är laddade! 🌮🍻\n\n📅 Fredag 30 Oktober \n⏰ Kl. 20.00–23.00\n\nBoka ert bord i god tid – vi ses på Taco del Búho! 🔥",
       "time": "20:00-23:00",
       "note": "Boka bord"
     }
