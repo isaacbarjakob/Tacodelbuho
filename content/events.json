@@ -8,6 +8,22 @@
       "text": "🦉 Varmt välkomna till våra populära quizkvällar!\n\nVåra quizvärdar är redo – är ni? 🎤🧠\n\nMaten är redo, kylarna är fyllda och frågorna är laddade! 🌮🍻\n\n📅 Fredag 30 Oktober \n⏰ Kl. 20.00–23.00\n\nBoka ert bord i god tid – vi ses på Taco del Búho! 🔥",
       "time": "20:00-23:00",
       "note": "Boka bord"
+    },
+    {
+      "type": "Taco Buffe",
+      "date": "28/10",
+      "title": "TACOBUFFE",
+      "text": "Varmt välkomna till våra populära Tacobuffe",
+      "time": "12-18",
+      "note": ""
+    },
+    {
+      "type": "Tacobuffe",
+      "date": "1/11",
+      "title": "Tacobuffe",
+      "text": "Varmt välkomna till våra populära Tacobuffe",
+      "time": "12-18",
+      "note": ""
     }
   ]
 }
