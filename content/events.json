@@ -3,26 +3,26 @@
   "events": [
     {
       "type": "QUIZ KVÄLL",
-      "date": "Fredag 30/10",
+      "date": "Fredag 4/12",
       "title": "QUIZKVÄLL",
-      "text": "🦉 Varmt välkomna till våra populära quizkvällar!\n\nVåra quizvärdar är redo – är ni? 🎤🧠\n\nMaten är redo, kylarna är fyllda och frågorna är laddade! 🌮🍻\n\n📅 Fredag 30 Oktober \n⏰ Kl. 20.00–23.00\n\nBoka ert bord i god tid – vi ses på Taco del Búho! 🔥",
+      "text": "🦉 Varmt välkomna till våra populära quizkvällar!\n\nVåra quizvärdar är redo – är ni? 🎤🧠\n\nMaten är redo, kylarna är fyllda och frågorna är laddade! 🌮🍻\n\n📅 Fredag 4 Dec\n⏰ Kl. 20.00–23.00\n\nBoka ert bord i god tid – vi ses på Taco del Búho! 🔥",
       "time": "20:00-23:00",
       "note": "Boka bord"
     },
     {
-      "type": "Taco Buffe",
-      "date": "28/10",
-      "title": "TACOBUFFE",
-      "text": "Varmt välkomna till våra populära Tacobuffe",
-      "time": "12-18",
+      "type": "Avhämtning/Take Away Mat 20% rabatt",
+      "date": "1/11-31/12",
+      "title": "20% off",
+      "text": "Hela november och december erbjuder vi 20% på takeaway.\nSmaklig måltid🌮",
+      "time": "1",
       "note": ""
     },
     {
-      "type": "Tacobuffe",
-      "date": "1/11",
-      "title": "Tacobuffe",
-      "text": "Varmt välkomna till våra populära Tacobuffe",
-      "time": "12-18",
+      "type": "",
+      "date": "",
+      "title": "",
+      "text": "",
+      "time": "",
       "note": ""
     }
   ]
